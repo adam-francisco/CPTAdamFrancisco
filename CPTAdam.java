@@ -9,9 +9,9 @@ public class CPTAdam{
 		con.println("How are you?");
 		strMood = con.readLine();
 		//Determines response
-		if(strMood.equalsIgnoreCase("good")){
+		if(strMood.equalsIgnoreCase("good")||strMood.equalsIgnoreCase("great")||strMood.equalsIgnoreCase("amazing") ){
 			con.println("That's great");
-		}else if(strMood.equalsIgnoreCase("ok")){
+		}else if(strMood.equalsIgnoreCase("ok")||strMood.equalsIgnoreCase("alright")){
 			con.println("Hopefully you feel better");
 		}else{
 			con.println("That's too bad");
