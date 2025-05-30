@@ -10,14 +10,14 @@ public class CPTAdam{
 		con.fillRect(0,0,1000,600);
 		
 		con.setDrawColor(new Color(205, 205, 205));
-		con.fillRect(498, 220, 5, 155);
+		con.fillRect(495, 220, 5, 155);
 		
 		con.setDrawColor(Color.BLACK);
-		con.drawString("Blackjack",535,220);
-		con.drawString("Main Menu",535,250);
-		con.drawString("Play [P]",535,280);
-		con.drawString("Leaderboard [L]",535,310);
-		con.drawString("Quit [Q]",535,340);
+		con.drawString("Blackjack",532,220);
+		con.drawString("Main Menu",532,250);
+		con.drawString("Play [P]",532,280);
+		con.drawString("Leaderboard [L]",532,310);
+		con.drawString("Quit [Q]",532,340);
 		
 		con.setDrawColor(new Color(205, 205, 205));
 		con.drawString("* Type and enter the corresponding letter to open the option", 137, 555);
