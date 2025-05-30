@@ -10,7 +10,7 @@ public class CPTAdam{
 		con.fillRect(0,0,1000,600);
 		
 		con.setDrawColor(new Color(205, 205, 205));
-		con.fillRect(498,220,5,150);
+		con.fillRect(498, 220, 5, 155);
 		
 		con.setDrawColor(Color.BLACK);
 		con.drawString("Blackjack",535,220);
