@@ -40,15 +40,20 @@ public class CPTAdam{
 		// Play option
 		if(chrOption == 'p' || chrOption == 'P'){
 			
+			// Page created for name of player
 			con.setBackgroundColor(Color.BLACK);
 			
+			// Variable for name
 			String strName;
 			
+			// Collects string value for player name
 			con.println("What's your name?: ");
 			strName = con.readLine();
 			
+			// clears text from console
 			con.clear();
 			
+			// Sets table color
 			con.setBackgroundColor(new Color(53, 101, 77));
 			
 			// Card slot holders
@@ -79,6 +84,7 @@ public class CPTAdam{
 			con.fillRoundRect(660, 60, 80, 180, 50, 50);
 			con.fillRoundRect(860, 35, 80, 180, 50, 50);
 			
+			// Name and dealer strings onto console
 			con.setDrawColor(Color.WHITE);
 			con.drawString("Dealer",465,10);
 			con.drawString(strName ,475,560);
