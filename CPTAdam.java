@@ -20,7 +20,7 @@ public class CPTAdam{
 		con.drawString("Quit [Q]",532,340);
 		
 		con.setDrawColor(new Color(205, 205, 205));
-		con.drawString("* Type and enter the corresponding letter to open the option", 137, 555);
+		con.drawString("* Type the corresponding letter to open the option", 197, 555);
 		
 		BufferedImage imgPoker = con.loadImage("blackjack.png");
 				con.drawImage(imgPoker, 180, 150);
