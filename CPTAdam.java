@@ -40,6 +40,8 @@ public class CPTAdam{
 		// Play option
 		if(chrOption == 'p' || chrOption == 'P'){
 			
+			con.repaint();
+			
 			int intCash;
 			
 			intCash = 1000;
@@ -94,12 +96,18 @@ public class CPTAdam{
 			con.drawString(strName + " - $" + intCash,440,560);
 			
 		}else if(chrOption == 'l' || chrOption == 'L'){
+			
+			con.repaint();
+			
 			con.setBackgroundColor(Color.BLACK);
 			
 		}else if(chrOption == 'q' || chrOption == 'Q'){
 			con.closeConsole();
 			
 		}else if(chrOption == 'h' || chrOption == 'H'){
+			
+			con.repaint();
+			
 			con.setBackgroundColor(Color.WHITE);
 			
 			char chrOption2;
@@ -122,6 +130,11 @@ public class CPTAdam{
 			System.out.println("entered letter: "+chrOption2);
 			
 			if(chrOption == 'r' || chrOption == 'R'){
+				
+			}else if(chrOption == 'c' || chrOption == 'C'){
+				
+			}else if(chrOption == 's' || chrOption == 'S'){
+				con.setBackgroundColor(Color.BLACK);
 				
 			}
 		}
