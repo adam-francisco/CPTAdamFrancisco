@@ -46,6 +46,9 @@ public class CPTAdam{
 			con.repaint();
 			
 			int intCash;
+			int intBet;
+			int intPlayer;
+			int intDealer;
 			
 			intCash = 1000;
 			
@@ -61,6 +64,7 @@ public class CPTAdam{
 			
 			// clears text from console
 			con.clear();
+			
 			
 			// Sets table color
 			/*con.setBackgroundColor(new Color(53, 101, 77));
