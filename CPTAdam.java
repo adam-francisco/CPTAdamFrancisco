@@ -118,7 +118,7 @@ public class CPTAdam{
 			con.setDrawColor(Color.BLACK);
 			con.drawString("HELP MENU",445,400);
 			con.drawString("[R] Rules",445,480);	
-			con.drawString("[C] Credits",445,510);
+			con.drawString("[C] Card Values",445,510);
 			
 			con.setDrawColor(new Color(245, 245, 245));
 			con.drawString("[S] ???",445,540);		
@@ -129,11 +129,18 @@ public class CPTAdam{
 			chrOption2 = con.getChar();
 			System.out.println("entered letter: "+chrOption2);
 			
-			if(chrOption == 'r' || chrOption == 'R'){
+			if(chrOption2 == 'r' || chrOption2 == 'R'){
 				
-			}else if(chrOption == 'c' || chrOption == 'C'){
+				BufferedImage imgRules = con.loadImage("Rules.png");
+					con.drawImage(imgRules, 0, 0);
+					
+			}else if(chrOption2 == 'c' || chrOption2 == 'C'){
 				
-			}else if(chrOption == 's' || chrOption == 'S'){
+				con.setBackgroundColor(new Color(131,203,123));
+				BufferedImage imgValue = con.loadImage("CardValues.png");
+					con.drawImage(imgValue, 100, 0);
+				
+			}else if(chrOption2 == 's' || chrOption2 == 'S'){
 				con.setBackgroundColor(Color.BLACK);
 				
 			}
