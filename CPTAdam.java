@@ -62,6 +62,11 @@ public class CPTAdam{
 			con.println("What's your name?: ");
 			strName = con.readLine();
 			
+			con.println("You will start off with $1000");
+			con.println("How much would you like to bet?");
+			intBet = con.readInt();
+			System.out.println("Bet amount: "+intBet);
+			
 			// clears text from console
 			con.clear();
 			
