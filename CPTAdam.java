@@ -26,12 +26,15 @@ public class CPTAdam{
 		con.drawString("Help [H]",532,360);
 		
 		// Image/ Logo
+		
 		BufferedImage imgPoker = con.loadImage("blackjack.png");
 				con.drawImage(imgPoker, 180, 140);
 		
 		// New color for Hint/ assistance
 		con.setDrawColor(new Color(205, 205, 205));
 		con.drawString("* Type the corresponding letter to open the option", 197, 555);
+		
+		con.repaint();
 		
 		// for determining option on menu
 		chrOption = con.getChar();
@@ -60,7 +63,7 @@ public class CPTAdam{
 			con.clear();
 			
 			// Sets table color
-			con.setBackgroundColor(new Color(53, 101, 77));
+			/*con.setBackgroundColor(new Color(53, 101, 77));
 			
 			// Card slot holders
 			con.setDrawColor(new Color(187, 165, 61));
@@ -93,7 +96,7 @@ public class CPTAdam{
 			// Name and dealer strings onto console
 			con.setDrawColor(Color.WHITE);
 			con.drawString("Dealer",465,10);
-			con.drawString(strName + " - $" + intCash,440,560);
+			con.drawString(strName + " - $" + intCash,440,560);*/
 			
 		}else if(chrOption == 'l' || chrOption == 'L'){
 			
@@ -106,11 +109,11 @@ public class CPTAdam{
 			
 		}else if(chrOption == 'h' || chrOption == 'H'){
 			
-			con.repaint();
-			
 			con.setBackgroundColor(Color.WHITE);
 			
 			char chrOption2;
+			
+			con.repaint();
 			
 			BufferedImage imgAces = con.loadImage("Aces.png");
 				con.drawImage(imgAces, 300, 0);
@@ -126,6 +129,8 @@ public class CPTAdam{
 			con.setDrawColor(new Color(205, 205, 205));
 			con.fillRect(400, 450, 200, 5);
 			
+			con.repaint();
+			
 			chrOption2 = con.getChar();
 			System.out.println("entered letter: "+chrOption2);
 			
@@ -134,15 +139,24 @@ public class CPTAdam{
 				BufferedImage imgRules = con.loadImage("Rules.png");
 					con.drawImage(imgRules, 0, 0);
 					
+				con.repaint();
+							
 			}else if(chrOption2 == 'c' || chrOption2 == 'C'){
 				
 				con.setBackgroundColor(new Color(131,203,123));
 				BufferedImage imgValue = con.loadImage("CardValues.png");
 					con.drawImage(imgValue, 100, 0);
 				
-			}else if(chrOption2 == 's' || chrOption2 == 'S'){
-				con.setBackgroundColor(Color.BLACK);
+				con.repaint();
 				
+			}else if(chrOption2 == 's' || chrOption2 == 'S'){
+				
+				con.setBackgroundColor(Color.WHITE);
+				
+				BufferedImage imgMeme = con.loadImage("Meme.png");
+					con.drawImage(imgMeme, 0, 0);
+					
+				con.repaint();
 			}
 		}
 	}
