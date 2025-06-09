@@ -62,50 +62,26 @@ public class CPTAdam{
 			con.println("What's your name?: ");
 			strName = con.readLine();
 			
-			con.println("You will start off with $1000");
+			if(strName.equalsIgnoreCase("statitan")){
+				intCash = 2500;
+			}
+			
+			con.println("You will start off with $"+intCash);
 			con.println("How much would you like to bet?");
 			intBet = con.readInt();
+			
 			System.out.println("Bet amount: "+intBet);
+			
+			while(intBet > intCash){
+				
+				con.println("You can't bet that much");
+				
+				con.println("How much would you like to bet?");
+				intBet = con.readInt();
+			}
 			
 			// clears text from console
 			con.clear();
-			
-			
-			// Sets table color
-			/*con.setBackgroundColor(new Color(53, 101, 77));
-			
-			// Card slot holders
-			con.setDrawColor(new Color(187, 165, 61));
-			con.fillRoundRect(50, 375, 100, 200, 30, 30);
-			con.fillRoundRect(250, 350, 100, 200, 30, 30);
-			con.fillRoundRect(450, 325, 100, 200, 30, 30);
-			con.fillRoundRect(650, 350, 100, 200, 30, 30);
-			con.fillRoundRect(850, 375, 100, 200, 30, 30);
-			
-			con.fillRoundRect(50, 25, 100, 200, 30, 30);
-			con.fillRoundRect(250, 50, 100, 200, 30, 30);
-			con.fillRoundRect(450, 75, 100, 200, 30, 30);
-			con.fillRoundRect(650, 50, 100, 200, 30, 30);
-			con.fillRoundRect(850, 25, 100, 200, 30, 30);
-			
-			// Card slot filler
-			con.setDrawColor(new Color(53, 101, 77));
-			con.fillRoundRect(60, 385, 80, 180, 25, 25);
-			con.fillRoundRect(260, 360, 80, 180, 25, 25);
-			con.fillRoundRect(460, 335, 80, 180, 25, 25);
-			con.fillRoundRect(660, 360, 80, 180, 25, 25);
-			con.fillRoundRect(860, 385, 80, 180, 25, 25);
-			
-			con.fillRoundRect(60, 35, 80, 180, 25, 25);
-			con.fillRoundRect(260, 60, 80, 180, 25, 25);
-			con.fillRoundRect(460, 85, 80, 180, 25, 25);
-			con.fillRoundRect(660, 60, 80, 180, 25, 25);
-			con.fillRoundRect(860, 35, 80, 180, 25, 25);
-			
-			// Name and dealer strings onto console
-			con.setDrawColor(Color.WHITE);
-			con.drawString("Dealer",465,10);
-			con.drawString(strName + " - $" + intCash,440,560);*/
 			
 		}else if(chrOption == 'l' || chrOption == 'L'){
 			
