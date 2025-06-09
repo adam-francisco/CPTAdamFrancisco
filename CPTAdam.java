@@ -109,67 +109,70 @@ public class CPTAdam{
 	
 	}
 	
-	public static void help(Console con){
-	
-		char chrOption2;
-		
+	public static void help(Console con) {
 		while(true){
-			
+       
 			con.setBackgroundColor(Color.WHITE);
-				
-			con.repaint();
-				
+			con.clear();
+        
 			BufferedImage imgAces = con.loadImage("Aces.png");
-				con.drawImage(imgAces, 300, 0);
-					
+			con.drawImage(imgAces, 300, 0);
+
 			con.setDrawColor(Color.BLACK);
 			con.drawString("HELP MENU",445,380);
-			con.drawString("[R] Rules",445,460);	
+			con.drawString("[R] Rules",445,460);    
 			con.drawString("[C] Card Values",445,490);
 			con.drawString("[Q] Main Menu",445,520);
 			
-				
-			con.setDrawColor(new Color(245, 245, 245));
-			con.drawString("[S] ???",445,550);		
-				
+			con.setDrawColor(new Color(250, 250, 250));
+			con.drawString("[S] ???",445,550);        
+			
 			con.setDrawColor(new Color(205, 205, 205));
 			con.fillRect(400, 430, 200, 5);
-				
+
 			con.repaint();
-				
-			chrOption2 = con.getChar();
+
+			char chrOption2 = con.getChar();
 			System.out.println("entered letter: "+chrOption2);
-			
-			if(chrOption2 == 'r' || chrOption2 == 'R'){
-					
-				BufferedImage imgRules = con.loadImage("Rules.png");
-					con.drawImage(imgRules, 0, 0);
-						
-				con.repaint();
-								
-			}else if(chrOption2 == 'c' || chrOption2 == 'C'){
-					
-				con.setBackgroundColor(new Color(131,203,123));
-				BufferedImage imgValue = con.loadImage("CardValues.png");
-					con.drawImage(imgValue, 100, 0);
-					
-				con.repaint();
-					
-			}else if(chrOption2 == 's' || chrOption2 == 'S'){
-					
+
+			if(chrOption2 == 'r' || chrOption2 == 'R') {
+
 				con.setBackgroundColor(Color.WHITE);
-					
-				BufferedImage imgMeme = con.loadImage("Meme.png");
-					con.drawImage(imgMeme, 0, 0);
-						
+				con.clear();
+
+				BufferedImage imgRules = con.loadImage("Rules.png");
+				con.drawImage(imgRules, 0, 0);
 				con.repaint();
-				
-			}else if(chrOption2 == 'q' || chrOption2 == 'Q'){
-					
+
+
+				con.getChar();
+
+			} else if(chrOption2 == 'c' || chrOption2 == 'C') {
+				con.setBackgroundColor(new Color(131,203,123));
+				con.clear();
+
+				BufferedImage imgValue = con.loadImage("CardValues.png");
+				con.drawImage(imgValue, 100, 0);
+				con.repaint();
+
+				con.getChar();
+
+			} else if(chrOption2 == 's' || chrOption2 == 'S') {
+				con.setBackgroundColor(Color.WHITE);
+				con.clear();
+
+				BufferedImage imgMeme = con.loadImage("Meme.png");
+				con.drawImage(imgMeme, 0, 0);
+				con.repaint();
+
+				con.getChar();
+
+			} else if(chrOption2 == 'q' || chrOption2 == 'Q') {
+
 				con.clear();
 				return;
-				
 			}
+
 		}
 	}
 }
