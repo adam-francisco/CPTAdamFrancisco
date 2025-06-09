@@ -42,9 +42,25 @@ public class CPTAdam{
 			
 		// Play option
 		if(chrOption == 'p' || chrOption == 'P'){
+		
+			play(con);
 			
-			con.repaint();
+		}else if(chrOption == 'l' || chrOption == 'L'){
 			
+			leaderboard(con);
+			
+		}else if(chrOption == 'q' || chrOption == 'Q'){
+			
+			con.closeConsole();
+			
+		}else if(chrOption == 'h' || chrOption == 'H'){
+			
+			help(con);
+			
+	}
+	
+		public static void play(Console con){
+		
 			int intCash;
 			int intBet;
 			int intPlayer;
@@ -82,19 +98,18 @@ public class CPTAdam{
 			
 			// clears text from console
 			con.clear();
-			
-		}else if(chrOption == 'l' || chrOption == 'L'){
-			
-			con.repaint();
-			
-			con.setBackgroundColor(Color.BLACK);
-			
-		}else if(chrOption == 'q' || chrOption == 'Q'){
-			con.closeConsole();
-			
-		}else if(chrOption == 'h' || chrOption == 'H'){
-			
-			con.setBackgroundColor(Color.WHITE);
+		
+		}
+	
+		public static void leaderboard(Console con){
+	
+		con.setBackgroundColor(Color.BLACK);
+	
+		}
+	
+		public static void help(Console con){
+	
+		con.setBackgroundColor(Color.WHITE);
 			
 			char chrOption2;
 			
