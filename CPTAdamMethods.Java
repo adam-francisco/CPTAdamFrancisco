@@ -11,14 +11,13 @@ public class CPTAdamMethods{
 		int intCardValue;
 		int intCardSuit;
 		
-		// Load deck with values and suits, plus a random number for sorting
-		for (intCardSuit = 0; intCardSuit <= 3; intCardSuit++) {
+		for (intCardSuit = 0; intCardSuit < 4; intCardSuit++) {
 			
-			for (intCardValue = 0; intCardValue <= 12; intCardValue++) {
+			for (intCardValue = 0; intCardValue < 13; intCardValue++) {
 				
-				intDeck[intCards][0] = intCardValue;// card value
-				intDeck[intCards][1] = intCardSuit;// suit
-				intDeck[intCards][2] = (int)(Math.random() * 100 + 1);// random number for shuffling
+				intDeck[intCards][0] = intCardValue;
+				intDeck[intCards][1] = intCardSuit;
+				intDeck[intCards][2] = (int)(Math.random() * 100 + 1);
 				intCards++;
 			}
 		}
@@ -30,9 +29,9 @@ public class CPTAdamMethods{
 		int intCount2;
 		
 		// Bubble sort by random number descending
-		for (intCount = 0; intCount < intDeck.length - 1; intCount++) {
+		for (intCount = 51; intCount > 0; intCount--) {
 			
-			for (intCount2 = 0; intCount2 < intDeck.length - 1 - intCount; intCount2++) {
+			for (intCount2 = 0; intCount2 < intCount; intCount2++) {
 				
 				if (intDeck[intCount2][2] < intDeck[intCount2 + 1][2]) {
 					
@@ -52,7 +51,11 @@ public class CPTAdamMethods{
 					intDeck[intCount2 + 1][2] = intRandTemp;
 					
 				}
-			}
+			}	
+		}
+		
+		for(intCount = 0; intCount < intCards; intCount++){
+			System.out.println(intDeck[intCount][0] + " - " + intDeck[intCount][1] + " - " + intDeck[intCount][2]);
 		}
 		
 		return intDeck;
