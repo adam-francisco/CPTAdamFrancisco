@@ -3,6 +3,10 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class CPTAdamMethods{
+	public static void main(String[] args){
+		Console con = new Console();
+		
+	}
 	public static int[][] deck() {
 		
 		int intDeck[][] = new int[52][3];
@@ -27,6 +31,10 @@ public class CPTAdamMethods{
 		int intRandTemp;
 		int intCount;
 		int intCount2;
+		int intCount3;
+		int intRandNum;
+		String strCardValue;
+		String strCardSuit;
 		
 		// Bubble sort by random number descending
 		for (intCount = 51; intCount > 0; intCount--) {
@@ -51,11 +59,19 @@ public class CPTAdamMethods{
 					intDeck[intCount2 + 1][2] = intRandTemp;
 					
 				}
-			}	
+			}
 		}
-		
-		for(intCount = 0; intCount < intCards; intCount++){
-			System.out.println(intDeck[intCount][0] + " - " + intDeck[intCount][1] + " - " + intDeck[intCount][2]);
+
+		String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+		String[] values = {"Ace", "2", "3", "4", "5", "6", "7","8", "9", "10", "Jack", "Queen", "King"};
+
+
+		for (intCount3 = 0; intCount3 < 52; intCount3++) {
+			strCardValue = values[intDeck[intCount3][0]];
+			strCardSuit = suits[intDeck[intCount3][1]];
+			intRandNum = intDeck[intCount3][2];
+			System.out.println(strCardValue + " of " + strCardSuit + " - " + intRandNum);
+			
 		}
 		
 		return intDeck;
