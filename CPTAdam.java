@@ -62,46 +62,90 @@ public class CPTAdam{
 			}
 		}
 	}
+	
 	public static void play(Console con){
 		
-		int intCash;
-		int intBet;
-		int intPlayer;
-		int intDealer;
-			
-		intCash = 1000;
-			
-		// Page created for name of player
-		con.setBackgroundColor(Color.BLACK);
-			
-		// Variable for name
-		String strName;
-			
-		// Collects string value for player name
-		con.println("What's your name?: ");
-		strName = con.readLine();
-			
-		if(strName.equalsIgnoreCase("statitan")){
-			intCash = 2500;
-		}
-			
-		con.println("You will start off with $"+intCash);
-		con.println("How much would you like to bet?");
-		intBet = con.readInt();
-			
-		System.out.println("Bet amount: "+intBet);
-			
-		while(intBet > intCash){
-				
-			con.println("You can't bet that much");
-				
-			con.println("How much would you like to bet?");
-			intBet = con.readInt();
-		}
+    int intCash = 1000;
+    int intBet;
+    
+    String strName;
+
+    con.setBackgroundColor(Color.BLACK);
+    
+    con.println("What's your name?: ");
+    strName = con.readLine();
+
+    if(strName.equalsIgnoreCase("statitan")){
+        intCash = 2500;
+    }
+
+    boolean blnPlaying = true;
+
+    while (blnPlaying){
 		
-		
-		
-	}
+        con.println("You will start off with $" + intCash);
+        con.println("How much would you like to bet?");
+        intBet = con.readInt();
+
+        while (intBet > intCash || intBet <= 0){
+            con.println("You can't bet that much");
+            con.println("How much would you like to bet?");
+            intBet = con.readInt();
+        }
+
+        int[][] intDeck = CPTAdamMethods.deck();
+
+        int[][] intPlayer = new int[5][2];
+        int[][] intDealer = new int[5][2];
+        int intDeckPos = 0;
+
+        intPlayer[0][0] = intDeck[intDeckPos][0];
+        intPlayer[0][1] = intDeck[intDeckPos][1];
+        intDeckPos = intDeckPos + 1;
+
+        intPlayer[1][0] = intDeck[intDeckPos][0];
+        intPlayer[1][1] = intDeck[intDeckPos][1];
+        intDeckPos = intDeckPos + 1;
+
+        intDealer[0][0] = intDeck[intDeckPos][0];
+        intDealer[0][1] = intDeck[intDeckPos][1];
+        intDeckPos = intDeckPos + 1;
+
+        String[] suits = { "Diamonds", "Clubs", "Hearts", "Spades" };
+        String[] values = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+
+        con.println();
+        con.println("Your cards:");
+        con.println(values[intPlayer[0][0]] + " of " + suits[intPlayer[0][1]]);
+        con.println(values[intPlayer[1][0]] + " of " + suits[intPlayer[1][1]]);
+        con.println();
+        
+        con.println("Dealer shows:");
+        con.println(values[intDealer[0][0]] + " of " + suits[intDealer[0][1]]);
+        con.println();
+
+        boolean blnInHand = true;
+
+        while (blnInHand){
+            con.println("Press [H] to Hit or [S] to Stand");
+            char choice = con.getChar();
+
+            if(choice == 'h' || choice == 'H'){
+                con.println("You chose to Hit.");
+                
+            }else if(choice == 's' || choice == 'S'){
+                con.println("You chose to Stand.");
+                
+                blnInHand = false; 
+            }else{
+                con.println("Invalid option, try again.");
+            }
+        }
+        
+        
+        
+    }
+}
 	
 	public static void leaderboard(Console con){
 	

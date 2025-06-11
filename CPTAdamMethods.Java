@@ -6,6 +6,8 @@ public class CPTAdamMethods{
 	public static void main(String[] args){
 		Console con = new Console();
 		
+		deck();
+		
 	}
 	public static int[][] deck() {
 		
