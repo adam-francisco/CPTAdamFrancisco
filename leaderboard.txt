@@ -6,3 +6,11 @@ adam
 1400
 statitan
 10000
+statitan
+25000
+adam
+800
+adam
+0
+adam
+0

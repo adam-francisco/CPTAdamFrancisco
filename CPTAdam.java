@@ -1,7 +1,7 @@
 // Adam Matthew H. Francisco
 // Offline Blackjack
 // 12 June, 2025
-// Version  1.41
+// Version  1.42
 
 import arc.*;
 import java.awt.Color;
@@ -443,6 +443,8 @@ public class CPTAdam{
             }
         }
 		
+		con.println("You now have $" + intCash);
+		
 		// If player has no money, end the game
         if (intCash <= 0){
 			
@@ -450,13 +452,22 @@ public class CPTAdam{
             con.println("You're out of money! Game over.");
             blnPlaying = false;
             
+            con.println("Press any key to return to main menu.");
+            con.getChar();
+			
+			// Clear screen
             con.clear();
-            return;
+
+			// Add user to leaderboard
+            TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+            leaderboardfile.println(strName);
+            leaderboardfile.println(intCash);
+            leaderboardfile.close();
             
+            return;
         }
 		
 		// Prompts user for another turn
-        con.println("You now have $" + intCash);
         con.println("Do you want to play again? (Y/N)");
         
         // Checks user response

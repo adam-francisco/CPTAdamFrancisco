@@ -1,7 +1,7 @@
 // Adam Matthew H. Francisco
 // Offline Blackjack
 // 12 June, 2025
-// Version  1.41
+// Version  1.42
 
 import arc.*;
 import java.awt.Color;
