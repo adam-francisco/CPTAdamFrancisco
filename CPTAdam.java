@@ -1,3 +1,8 @@
+// Adam Matthew H. Francisco
+// Offline Blackjack
+// 12 June, 2025
+// Version  1.39
+
 import arc.*;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -64,499 +69,419 @@ public class CPTAdam{
 	}
 	
 	public static void play(Console con){
-		
+	
+	// Creates 2 essential integer variables for the player, being amount of money and bet amount
     int intCash = 1000;
     int intBet;
-    
+	
+	// Creates a string variable to hold player name information
     String strName;
 
+	// Sets background color
     con.setBackgroundColor(Color.BLACK);
-    
+	
+	// Asks user for name
     con.println("What's your name?: ");
     strName = con.readLine();
-
+	
+	// Special case for if player names themselves "statitan"
     if(strName.equalsIgnoreCase("statitan")){
+		
+		// Player buff
         intCash = 2500;
+        
     }
-
+	
+	// Creates boolean variable for the loop
     boolean blnPlaying = true;
-
+	
+	// Starts the playing loop
     while (blnPlaying){
 		
+		// Gives intBet an amount indicated by the player
         con.println("You will start off with $" + intCash);
         con.println("How much would you like to bet?");
         intBet = con.readInt();
-
+		
+		// Special case for if player places an invalid bet (ie. more money than they have OR less than or equal to 0)
         while (intBet > intCash || intBet <= 0){
+			
             con.println("You can't bet that much");
             con.println("How much would you like to bet?");
             intBet = con.readInt();
+            
         }
-        
+		
+		// Clears the screen for the game
         con.clear();
-
+		
+		// Connects to the method deck for cards
         int[][] intDeck = CPTAdamMethods.deck();
-
+		
+		// Creates the 5x2 array for dealer and the player
         int[][] intPlayer = new int[5][2];
         int[][] intDealer = new int[5][2];
+        
+        // Creates the intDeckPos variable to check for what position the deck is in, along with dealing cards
         int intDeckPos = 0;
-
+		
+		// Deals players first card
         intPlayer[0][0] = intDeck[intDeckPos][0];
         intPlayer[0][1] = intDeck[intDeckPos][1];
         intDeckPos = intDeckPos + 1;
-
+		
+		// Deals players second card
         intPlayer[1][0] = intDeck[intDeckPos][0];
         intPlayer[1][1] = intDeck[intDeckPos][1];
         intDeckPos = intDeckPos + 1;
 
+		// Deals dealers first card
         intDealer[0][0] = intDeck[intDeckPos][0];
         intDealer[0][1] = intDeck[intDeckPos][1];
         intDeckPos = intDeckPos + 1;
-
+		
+		// Creates string arrays for naming cards
         String[] strSuits = { "Diamonds", "Clubs", "Hearts", "Spades" };
         String[] strValues = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
-
+		
+		// Prints out players cards
         con.println();
         con.println("Your cards:");
         con.println(strValues[intPlayer[0][0]] + " of " + strSuits[intPlayer[0][1]]);
         con.println(strValues[intPlayer[1][0]] + " of " + strSuits[intPlayer[1][1]]);
         con.println();
-        
+		
+		// Prints out dealers cards
         con.println("Dealer shows:");
         con.println(strValues[intDealer[0][0]] + " of " + strSuits[intDealer[0][1]]);
         con.println();
-        
-        int intPlayerCardCount = 2;
-		int intDealerCardCount = 1;
 		
-		int intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
-
-
-		if(intplayerHandValue == 21){
+		// Creates variable for checking how much cards the player and dealer have
+        int intPlayerCardCount = 2;
+        int intDealerCardCount = 1;
+		
+		// Uses the handvalue method to check how much the players hand is worth
+        int intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+		
+		// Creates rare blackjack start occurrence
+        if(intplayerHandValue == 21){
 			
-			con.println("Blackjack! You instantly win 3x your bet!");
-			intCash = intCash + (intBet * 3);
-			con.println("You now have $" + intCash);
+			// Gives a response to winning in such fashion, along with printing current money amount
+            con.println("Blackjack! You instantly win 3x your bet!");
+            intCash = intCash + (intBet * 3);
+            con.println("You now have $" + intCash);
 			
-			con.println("Do you want to play again? (Y/N)");
-			char playAgain = con.getChar();
+			// Asks user if they would like to play another round
+            con.println("Do you want to play again? (Y/N)");
+            char playAgain = con.getChar();
+			
+			// Starts the if statement for each case
+            if(playAgain == 'n' || playAgain == 'N'){
+				
+				// If player presses no, the boolean for playing turns false ending the loop
+                blnPlaying = false;
+				
+				// Prompts user to enter a key to return to the main menu
+                con.println("Press any key to return to main menu.");
+                con.getChar();
+				
+				// Clears screen so main menu is not obstructed
+                con.clear();
+				
+				// Loads up text file for writing
+                TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+                
+                // Loads in information
+                leaderboardfile.println(strName);
+                leaderboardfile.println(intCash);
+                
+                // Closes file
+                leaderboardfile.close();
 
-			if(playAgain == 'n' || playAgain == 'N'){
-						
-				blnPlaying = false; 
-						
-			}else if(playAgain == 'y' || playAgain == 'Y'){
+                return;
+			
+			// Else if for the case that the player clicks yes
+            }else if(playAgain == 'y' || playAgain == 'Y'){
 				
-				blnPlaying = true; 
-				
-			}else{
-					
-				con.println("Invalid input, returning to main menu.");
-				blnPlaying = false;
-						
-			}
-	
-		if (intCash == 0) {
-	
-			con.println("You lost all your money!");
-					
-		}	
+				// Loop says true
+                blnPlaying = true;
+			
+			// Else for the case that use presses a random letter
+            }else{
 
-		TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
-		leaderboardfile.println(strName);
-		leaderboardfile.println(intCash);
-		leaderboardfile.close();
-					
-		con.println("Press any key to return to main menu.");
-		con.getChar();
-					
-		con.clear();
-					
-		return;
-					
-		}
+                con.println("Invalid input, returning to main menu.");
+                blnPlaying = false;
+
+            }
+			
+			// If statement for if the player has no money
+            if (intCash == 0) {
 				
+				// Prints out a response
+                con.println("You lost all your money!");
+
+            }
+
+        }
+		
+		// Boolean variable for when in play
         boolean blnInHand = true;
 
+		// Starts while loop for when player either hits or stands
         while (blnInHand){
 			
-			intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
-			int intdealerHandValue = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
+			// Calculates hand values of both the player and dealer
+            intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+            int intdealerHandValue = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
 			
-			con.println();
-			con.println("Your current hand value: " + intplayerHandValue);
+			// Displays the current hand value for the player
+            con.println();
+            con.println("Your current hand value: " + intplayerHandValue);
 			
+			// Creates if statement for rare occurrence of a double down
             if (intPlayerCardCount == 2 && (intplayerHandValue == 9 || intplayerHandValue == 10 || intplayerHandValue == 11)){
 				
-				con.println("Press [H] to Hit, [S] to Stand, or [D] to Double Down");
-			}else{
-				
-				con.println("Press [H] to Hit or [S] to Stand");
-			}
-            
-            char choice = con.getChar();
-
-            if(choice == 'h' || choice == 'H'){
-                con.println("You chose to Hit.");
+				// Different statement is printed out
+                con.println("Press [H] to Hit, [S] to Stand, or [D] to Double Down");
                 
-				intPlayer[intPlayerCardCount][0] = intDeck[intDeckPos][0];
-				intPlayer[intPlayerCardCount][1] = intDeck[intDeckPos][1];
-				intDeckPos = intDeckPos + 1;
-				intPlayerCardCount = intPlayerCardCount + 1;
-
-				con.println("You drew: " + strValues[intPlayer[intPlayerCardCount - 1][0]] + " of " + strSuits[intPlayer[intPlayerCardCount - 1][1]]);
-
-				intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
-				con.println("Your hand value is now: " + intplayerHandValue);
+            // Statement for if a double down does not occur
+            }else{
 				
-				if (intPlayerCardCount == 5 && intplayerHandValue <= 21){
+				// Standard statement
+                con.println("Press [H] to Hit or [S] to Stand");
+                
+            }
+			
+			// Checks for what user inputs
+            char choice = con.getChar();
+			
+			// Hit scenario
+            if(choice == 'h' || choice == 'H'){
+
+				// Draws the next card
+                intPlayer[intPlayerCardCount][0] = intDeck[intDeckPos][0];
+                intPlayer[intPlayerCardCount][1] = intDeck[intDeckPos][1];
+                
+                // Adds to tracking variables
+                intDeckPos = intDeckPos + 1;
+                intPlayerCardCount = intPlayerCardCount + 1;
+				
+				// Tells player what card is drawn
+                con.println("You drew: " + strValues[intPlayer[intPlayerCardCount-1][0]] + " of " + strSuits[intPlayer[intPlayerCardCount-1][1]]);
+
+				// Uses methos to calculate new hand value
+                intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+                
+                // 5 Card occurrence 
+                if (intPlayerCardCount == 5 && intplayerHandValue <= 21){
 					
 					con.println("Five Card Charlie! You win 3x your bet!");
 					intCash = intCash + (intBet * 3);
+					
 					con.println("You now have $" + intCash);
-					
-					con.println("Round finished! Your current cash: $" + intCash);
-
-					con.println("Do you want to play again? (Y/N)");
-					char playAgain = con.getChar();
-
-					if(playAgain == 'n' || playAgain == 'N'){
-						
-						blnPlaying = false; 
-						
-					}else if(playAgain == 'y' || playAgain == 'Y'){
-				
-						blnPlaying = true; 
-				
-					}else{
-					
-						con.println("Invalid input, returning to main menu.");
-						blnPlaying = false;
-						
-					}
-	
-				if (intCash == 0) {
-	
-					con.println("You lost all your money!");
-					
-				}	
-
-				TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
-				leaderboardfile.println(strName);
-				leaderboardfile.println(intCash);
-				leaderboardfile.close();
-					
-				con.println("Press any key to return to main menu.");
-				con.getChar();
-					
-				con.clear();
-					
-				return;
-					
-				}
-				
-				if(intplayerHandValue > 21){
-					
-					con.println("Bust! You exceeded 21. You lose your bet.");
-					intCash = intCash - intBet;
-					
-					con.println("You have $" + intCash + " remaining.");
-					
-					con.println("Round finished! Your current cash: $" + intCash);
-
-					con.println("Do you want to play again? (Y/N)");
-					char playAgain = con.getChar();
-
-					if(playAgain == 'n' || playAgain == 'N'){
-						
-						blnPlaying = false; 
-						
-					}else if(playAgain == 'y' || playAgain == 'Y'){
-				
-						blnPlaying = true; 
-						
-					}else{
-					
-						con.println("Invalid input, returning to main menu.");
-						blnPlaying = false;
-					
-					}
-
-				if (intCash == 0) {
-
-					con.println("You lost all your money!");
-				
-				}
-
-				TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
-				leaderboardfile.println(strName);
-				leaderboardfile.println(intCash);
-				leaderboardfile.close();
-					
-				con.println("Press any key to return to main menu.");
-				con.getChar();
-					
-				con.clear();
-						
-				return;
-					
-				}
-                
-            }else if(choice == 's' || choice == 'S'){
-				
-                con.println("You chose to Stand.");
-
-				intDealer[1][0] = intDeck[intDeckPos][0];
-				intDealer[1][1] = intDeck[intDeckPos][1];
-				intDeckPos = intDeckPos + 1;
-
-				intDealerCardCount = 2;
-
-				con.println("Dealer reveals:");
-				con.println(strValues[intDealer[1][0]] + " of " + strSuits[intDealer[1][1]]);
-
-
-				while(CPTAdamMethods.handvalue(intDealer, intDealerCardCount) < 17 && intDealerCardCount < 5){
-					
-					intDealer[intDealerCardCount][0] = intDeck[intDeckPos][0];
-					intDealer[intDealerCardCount][1] = intDeck[intDeckPos][1];
-					con.println("Dealer draws: " + strValues[intDealer[intDealerCardCount][0]] + " of " + strSuits[intDealer[intDealerCardCount][1]]);
-					
-					intDeckPos = intDeckPos + 1;
-					intDealerCardCount = intDealerCardCount + 1;
-				}
-
-				int intPlayerTotal = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
-				int intDealerTotal = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
-
-				con.println();
-				con.println("Your total: " + intPlayerTotal);
-				con.println("Dealer total: " + intDealerTotal);
-
-
-				if(intDealerTotal > 21){
-					
-					con.println("Dealer busts! You win!");
-					intCash = intCash + intBet;
-					con.println("You now have $" + intCash);
-					
-				}else if(intDealerTotal > intPlayerTotal){
-					
-					con.println("Dealer wins.");
-					intCash = intCash - intBet;
-					
-				}else if(intDealerTotal < intPlayerTotal){
-					
-					con.println("You win!");
-					intCash = intCash + intBet;
-					con.println("You now have $" + intCash);
-
-				}else{
-					
-					con.println("Push! It's a tie.");
-					
-				}
-				
-				con.println("Do you want to play again? (Y/N)");
-				char playAgain = con.getChar();
-
-				if(playAgain == 'n' || playAgain == 'N'){
-						
-					blnPlaying = false; 
-						
-				}else if(playAgain == 'y' || playAgain == 'Y'){
-				
-					blnPlaying = true; 
-				
-				}else{
-					
-					con.println("Invalid input, returning to main menu.");
-					blnPlaying = false;
-					
-				}
-
-			if (intCash == 0) {
-
-				con.println("You lost all your money!");
-				
-			}
-
-			TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
-			leaderboardfile.println(strName);
-			leaderboardfile.println(intCash);
-			leaderboardfile.close();
-					
-			con.println("Press any key to return to main menu.");
-			con.getChar();
-					
-			con.clear();
-					
-			return;
-
-				
-			}else if((choice == 'd' || choice == 'D') && intPlayerCardCount == 2 && (intplayerHandValue == 9 || intplayerHandValue == 10 || intplayerHandValue == 11)){
-				
-				con.println("You chose to Double Down.");
-				
-				if(intCash >= intBet){
-					intCash = intCash - intBet;
-					intBet = intBet * 2;
-					
-					intPlayer[intPlayerCardCount][0] = intDeck[intDeckPos][0];
-					intPlayer[intPlayerCardCount][1] = intDeck[intDeckPos][1];
-					
-					intDeckPos = intDeckPos + 1;
-					intPlayerCardCount = intPlayerCardCount + 1;
-
-					con.println("You drew: " + strValues[intPlayer[intPlayerCardCount - 1][0]] + " of " + strSuits[intPlayer[intPlayerCardCount - 1][1]]);
-
-					intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
-					con.println("Your hand value is now: " + intplayerHandValue);
-
-					con.println("Dealer reveals second card:");
-					intDealer[1][0] = intDeck[intDeckPos][0];
-					intDealer[1][1] = intDeck[intDeckPos][1];
-					
-					intDeckPos = intDeckPos + 1;
-					intDealerCardCount = 2;
-					
-					con.println(strValues[intDealer[1][0]] + " of " + strSuits[intDealer[1][1]]);
-
-					while(CPTAdamMethods.handvalue(intDealer, intDealerCardCount) < 17 && intDealerCardCount < 5){
-						
-						intDealer[intDealerCardCount][0] = intDeck[intDeckPos][0];
-						intDealer[intDealerCardCount][1] = intDeck[intDeckPos][1];
-						con.println("Dealer draws: " + strValues[intDealer[intDealerCardCount][0]] + " of " + strSuits[intDealer[intDealerCardCount][1]]);
-						
-						intDeckPos = intDeckPos + 1;
-						intDealerCardCount = intDealerCardCount + 1;
-						
-						if (intDealerCardCount == 5 && CPTAdamMethods.handvalue(intDealer, intDealerCardCount) <= 21){
-							
-							con.println("Dealer has Five Card Charlie and wins!");
-							intCash = intCash - intBet;
-							con.println("You have $" + intCash + " remaining.");
-							
-							con.println("Round finished! Your current cash: $" + intCash);
-
-							con.println("Do you want to play again? (Y/N)");
-							char playAgain = con.getChar();
-	
-							if(playAgain == 'n' || playAgain == 'N'){
-						
-								blnPlaying = false; 
-						
-							}else if(playAgain == 'y' || playAgain == 'Y'){
-				
-								blnPlaying = true; 
-				
-							}else{
-					
-								con.println("Invalid input, returning to main menu.");
-								blnPlaying = false;
-					
-							}
-
-						if (intCash == 0) {
-
-							con.println("You lost all your money!");
-				
-						}
-
-						TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
-						leaderboardfile.println(strName);
-						leaderboardfile.println(intCash);
-						leaderboardfile.close();
-					
-						con.println("Press any key to return to main menu.");
-						con.getChar();
-					
-						con.clear();
-					
-						return;
-							
-						}
-						
-					}
-
-					int intPlayerTotal = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
-					int intDealerTotal = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
-
-					con.println();
-					con.println("Your total: " + intPlayerTotal);
-					con.println("Dealer total: " + intDealerTotal);
-
-					if(intDealerTotal > 21){
-						
-						con.println("Dealer busts! You win!");
-						intCash = intCash + intBet;
-						con.println("You now have $" + intCash);
-						
-					}else if(intDealerTotal > intPlayerTotal){
-						
-						con.println("Dealer wins.");
-						intCash = intCash - intBet;
-						
-					}else if(intDealerTotal < intPlayerTotal){
-						
-						con.println("You win!");
-						intCash = intCash + intBet;
-						con.println("You now have $" + intCash);
-						
-					}else{
-						con.println("Push! It's a tie.");
-					}
-					
-					con.println("Do you want to play again? (Y/N)");
-					char playAgain = con.getChar();
-
-					if(playAgain == 'n' || playAgain == 'N'){
-						
-						blnPlaying = false; 
-						
-					}else if(playAgain == 'y' || playAgain == 'Y'){
-				
-						blnPlaying = true; 
-				
-					}else{
-					
-						con.println("Invalid input, returning to main menu.");
-						blnPlaying = false;
-					
-					}
-
-				if (intCash == 0) {
-
-					con.println("You lost all your money!");
-				
-				}
-
-				TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
-				leaderboardfile.println(strName);
-				leaderboardfile.println(intCash);
-				leaderboardfile.close();
-					
-				con.println("Press any key to return to main menu.");
-				con.getChar();
-					
-				con.clear();
-					
-				return;
-					
-				}else{
-					
-					con.println("You don’t have enough money to double down.");
+					con.println("Press any key to continue.");
+					con.getChar();
+					blnInHand = false;
 					continue;
 					
 				}
+                
+                // Bust case scenario
+                if(intplayerHandValue > 21){
+					
+                    con.println("You busted with " + intplayerHandValue + "!");
+                    intCash = intCash - intBet;
+                    
+                    // Ends play
+                    blnInHand = false;
+                    
+                }
 			
-            }else{
-                con.println("Invalid option, try again.");
+			// Stand scenario
+            }else if(choice == 's' || choice == 'S'){
+				
+				//Keeps hitting while card value is under 17
+                while(CPTAdamMethods.handvalue(intDealer, intDealerCardCount) < 17){
+					
+					//Draws dealers cards
+                    intDealer[intDealerCardCount][0] = intDeck[intDeckPos][0];
+                    intDealer[intDealerCardCount][1] = intDeck[intDeckPos][1];
+                    
+                    // Adds to tracking variables
+                    intDeckPos = intDeckPos + 1;
+                    intDealerCardCount = intDealerCardCount + 1;
+                    
+                }
+                
+                // 5 card scenario for the dealer
+                if (intDealerCardCount == 5 && CPTAdamMethods.handvalue(intDealer, intDealerCardCount) <= 21){
+					
+					con.println("Dealer drew 5 cards without busting. Dealer wins automatically!");
+					intCash = intCash - intBet;
+					blnInHand = false;
+					continue;
+					
+				}
+				
+				// Calculates hand values
+                intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+                intdealerHandValue = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
+				
+				// Prints out dealers hand
+                con.println("Dealer's hand:");
+                for(int intCount = 0; intCount < intDealerCardCount; intCount++){
+					
+                    con.println(strValues[intDealer[intCount][0]] + " of " + strSuits[intDealer[intCount][1]]);
+                    
+                }
+				
+				// Prints out both hand values
+                con.println("Your hand value: " + intplayerHandValue);
+                con.println("Dealer's hand value: " + intdealerHandValue);
+				
+				// Win scenario
+                if(intdealerHandValue > 21 || intplayerHandValue > intdealerHandValue){
+					
+                    con.println("You win!");
+                    intCash = intCash + intBet;
+                
+                // Push Scenario   
+                }else if(intplayerHandValue == intdealerHandValue){
+					
+                    con.println("Push. Your bet is returned.");
+                
+                // Lose scenario   
+                }else{
+					
+                    con.println("You lose.");
+                    intCash = intCash - intBet;
+                    
+                }
+				
+				// Ends in hand boolean
+                blnInHand = false;
+			
+			// Double down scenario
+            }else if((choice == 'd' || choice == 'D') && intPlayerCardCount == 2 && (intplayerHandValue == 9 || intplayerHandValue == 10 || intplayerHandValue == 11)){
+				
+				// Checks if user can double down given how much cash they have
+                if(intCash >= intBet * 2){
+					
+					// Doubles bet
+                    intBet = intBet * 2;
+                    
+                    // Draws a new card
+                    intPlayer[intPlayerCardCount][0] = intDeck[intDeckPos][0];
+                    intPlayer[intPlayerCardCount][1] = intDeck[intDeckPos][1];
+                    
+                    // Adds to tracking variables
+                    intDeckPos = intDeckPos + 1;
+                    intPlayerCardCount = intPlayerCardCount + 1;
+					
+					// Shows player what they drew
+                    con.println("You drew: " + strValues[intPlayer[intPlayerCardCount-1][0]] + " of " + strSuits[intPlayer[intPlayerCardCount-1][1]]);
+					
+					// Calculates hand value
+                    intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+                    
+                        while(CPTAdamMethods.handvalue(intDealer, intDealerCardCount) < 17){
+							
+							// Draws dealers cards
+                            intDealer[intDealerCardCount][0] = intDeck[intDeckPos][0];
+                            intDealer[intDealerCardCount][1] = intDeck[intDeckPos][1];
+                            
+                            // Adds to tracking variables
+                            intDeckPos = intDeckPos + 1;
+                            intDealerCardCount = intDealerCardCount + 1;
+                            
+                        }
+						
+						// Checks for dealers hand value
+                        intdealerHandValue = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
+                        con.println("Dealer's hand:");
+                        
+                        // Prints dealers hand
+                        for(int intCount2 = 0; intCount2 < intDealerCardCount; intCount2++){
+							
+                            con.println(strValues[intDealer[intCount2][0]] + " of " + strSuits[intDealer[intCount2][1]]);
+                            
+                        }
+						
+						// Win scenario
+                        if(intdealerHandValue > 21 || intplayerHandValue > intdealerHandValue){
+							
+                            con.println("You win!");
+                            intCash = intCash + intBet;
+                        
+                        // Push scenario    
+                        }else if(intplayerHandValue == intdealerHandValue){
+							
+                            con.println("Push. Your bet is returned.");
+                        
+                        // Loss scenario    
+                        }else{
+							
+                            con.println("You lose.");
+                            intCash = intCash - intBet;
+                            
+                        }
+                    // Case in which you dont have money to double down
+                    }else{
+					
+                    con.println("You don't have enough money to double down.");
+                    
+					}
+                    
+                    // Ends bln in hand while loop
+                    blnInHand = false;
             
-			}
+            // Case in which player provides invalid input    
+            }else{
+				
+                con.println("Invalid input.");
+                
+            }
+        }
+		
+		// If player has no money, end the game
+        if (intCash <= 0){
+			
+			// Response to case scenario
+            con.println("You're out of money! Game over.");
+            blnPlaying = false;
+            
+            con.clear();
+            return;
+            
+        }
+		
+		// Prompts user for another turn
+        con.println("You now have $" + intCash);
+        con.println("Do you want to play again? (Y/N)");
+        
+        // Checks user response
+        char playAgain = con.getChar();
+		
+		// If no, end blnPlaying loop 
+        if(playAgain == 'n' || playAgain == 'N'){
+            blnPlaying = false;
+			
+			// Tell user to exit to main menu with any button press
+            con.println("Press any key to return to main menu.");
+            con.getChar();
+			
+			// Clear screen
+            con.clear();
+
+			// Add user to leaderboard
+            TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+            leaderboardfile.println(strName);
+            leaderboardfile.println(intCash);
+            leaderboardfile.close();
         }
     }
 }
+
 	
 	public static void leaderboard(Console con){
 	

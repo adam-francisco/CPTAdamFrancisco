@@ -1,10 +1,6 @@
-adamn
-2000
-adam
-0
-statitan
-5000
-Adam
-500
 adam
 250
+adam
+2000
+adam
+1400
