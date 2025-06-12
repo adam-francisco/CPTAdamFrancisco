@@ -138,10 +138,42 @@ public class CPTAdam{
 			intCash = intCash + (intBet * 3);
 			con.println("You now have $" + intCash);
 			
-			con.println("Press any key to return to the main menu...");
-			con.getChar();
-			con.clear();
-			return;
+			con.println("Do you want to play again? (Y/N)");
+			char playAgain = con.getChar();
+
+			if(playAgain == 'n' || playAgain == 'N'){
+						
+				blnPlaying = false; 
+						
+			}else if(playAgain == 'y' || playAgain == 'Y'){
+				
+				blnPlaying = true; 
+				
+			}else{
+					
+				con.println("Invalid input, returning to main menu.");
+				blnPlaying = false;
+						
+			}
+	
+		if (intCash == 0) {
+	
+			con.println("You lost all your money!");
+					
+		}	
+
+		TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+		leaderboardfile.println(strName);
+		leaderboardfile.println(intCash);
+		leaderboardfile.close();
+					
+		con.println("Press any key to return to main menu.");
+		con.getChar();
+					
+		con.clear();
+					
+		return;
+					
 		}
 				
         boolean blnInHand = true;
@@ -183,11 +215,43 @@ public class CPTAdam{
 					intCash = intCash + (intBet * 3);
 					con.println("You now have $" + intCash);
 					
-					con.println("Press any key to return to main menu.");
-					con.getChar();
+					con.println("Round finished! Your current cash: $" + intCash);
+
+					con.println("Do you want to play again? (Y/N)");
+					char playAgain = con.getChar();
+
+					if(playAgain == 'n' || playAgain == 'N'){
+						
+						blnPlaying = false; 
+						
+					}else if(playAgain == 'y' || playAgain == 'Y'){
+				
+						blnPlaying = true; 
+				
+					}else{
 					
-					con.clear();
-					return;
+						con.println("Invalid input, returning to main menu.");
+						blnPlaying = false;
+						
+					}
+	
+				if (intCash == 0) {
+	
+					con.println("You lost all your money!");
+					
+				}	
+
+				TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+				leaderboardfile.println(strName);
+				leaderboardfile.println(intCash);
+				leaderboardfile.close();
+					
+				con.println("Press any key to return to main menu.");
+				con.getChar();
+					
+				con.clear();
+					
+				return;
 					
 				}
 				
@@ -197,12 +261,45 @@ public class CPTAdam{
 					intCash = intCash - intBet;
 					
 					con.println("You have $" + intCash + " remaining.");
-					con.println("Press any key to return to main menu.");
-					con.getChar();
 					
-					con.clear();
+					con.println("Round finished! Your current cash: $" + intCash);
+
+					con.println("Do you want to play again? (Y/N)");
+					char playAgain = con.getChar();
+
+					if(playAgain == 'n' || playAgain == 'N'){
+						
+						blnPlaying = false; 
+						
+					}else if(playAgain == 'y' || playAgain == 'Y'){
+				
+						blnPlaying = true; 
+						
+					}else{
 					
-					return;
+						con.println("Invalid input, returning to main menu.");
+						blnPlaying = false;
+					
+					}
+
+				if (intCash == 0) {
+
+					con.println("You lost all your money!");
+				
+				}
+
+				TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+				leaderboardfile.println(strName);
+				leaderboardfile.println(intCash);
+				leaderboardfile.close();
+					
+				con.println("Press any key to return to main menu.");
+				con.getChar();
+					
+				con.clear();
+						
+				return;
+					
 				}
                 
             }else if(choice == 's' || choice == 'S'){
@@ -259,13 +356,43 @@ public class CPTAdam{
 					con.println("Push! It's a tie.");
 					
 				}
-
-				con.println("Press any key to return to the main menu...");
-				con.getChar();
-
-				con.clear();
 				
-				return;
+				con.println("Do you want to play again? (Y/N)");
+				char playAgain = con.getChar();
+
+				if(playAgain == 'n' || playAgain == 'N'){
+						
+					blnPlaying = false; 
+						
+				}else if(playAgain == 'y' || playAgain == 'Y'){
+				
+					blnPlaying = true; 
+				
+				}else{
+					
+					con.println("Invalid input, returning to main menu.");
+					blnPlaying = false;
+					
+				}
+
+			if (intCash == 0) {
+
+				con.println("You lost all your money!");
+				
+			}
+
+			TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+			leaderboardfile.println(strName);
+			leaderboardfile.println(intCash);
+			leaderboardfile.close();
+					
+			con.println("Press any key to return to main menu.");
+			con.getChar();
+					
+			con.clear();
+					
+			return;
+
 				
 			}else if((choice == 'd' || choice == 'D') && intPlayerCardCount == 2 && (intplayerHandValue == 9 || intplayerHandValue == 10 || intplayerHandValue == 11)){
 				
@@ -310,11 +437,43 @@ public class CPTAdam{
 							intCash = intCash - intBet;
 							con.println("You have $" + intCash + " remaining.");
 							
-							con.println("Press any key to return to main menu.");
-							con.getChar();
-							
-							con.clear();
-							return;
+							con.println("Round finished! Your current cash: $" + intCash);
+
+							con.println("Do you want to play again? (Y/N)");
+							char playAgain = con.getChar();
+	
+							if(playAgain == 'n' || playAgain == 'N'){
+						
+								blnPlaying = false; 
+						
+							}else if(playAgain == 'y' || playAgain == 'Y'){
+				
+								blnPlaying = true; 
+				
+							}else{
+					
+								con.println("Invalid input, returning to main menu.");
+								blnPlaying = false;
+					
+							}
+
+						if (intCash == 0) {
+
+							con.println("You lost all your money!");
+				
+						}
+
+						TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+						leaderboardfile.println(strName);
+						leaderboardfile.println(intCash);
+						leaderboardfile.close();
+					
+						con.println("Press any key to return to main menu.");
+						con.getChar();
+					
+						con.clear();
+					
+						return;
 							
 						}
 						
@@ -347,13 +506,42 @@ public class CPTAdam{
 					}else{
 						con.println("Push! It's a tie.");
 					}
+					
+					con.println("Do you want to play again? (Y/N)");
+					char playAgain = con.getChar();
 
-					con.println("Press any key to return to the main menu...");
-					con.getChar();
+					if(playAgain == 'n' || playAgain == 'N'){
+						
+						blnPlaying = false; 
+						
+					}else if(playAgain == 'y' || playAgain == 'Y'){
+				
+						blnPlaying = true; 
+				
+					}else{
 					
-					con.clear();
+						con.println("Invalid input, returning to main menu.");
+						blnPlaying = false;
 					
-					return;
+					}
+
+				if (intCash == 0) {
+
+					con.println("You lost all your money!");
+				
+				}
+
+				TextOutputFile leaderboardfile = new TextOutputFile("leaderboard.txt", true);
+				leaderboardfile.println(strName);
+				leaderboardfile.println(intCash);
+				leaderboardfile.close();
+					
+				con.println("Press any key to return to main menu.");
+				con.getChar();
+					
+				con.clear();
+					
+				return;
 					
 				}else{
 					
@@ -372,7 +560,81 @@ public class CPTAdam{
 	
 	public static void leaderboard(Console con){
 	
-		con.setBackgroundColor(Color.BLACK);
+		int intLineCounter;
+		int intPlayerCount;
+		int intCount;
+		int intCount2;
+		int intCount3;
+		int intMoneyTemp1;
+		int intMoneyTemp2;
+		String strTempName;
+		String strTempMoney;
+		int intCount4;
+	
+		con.setBackgroundColor(Color.WHITE);
+		con.setTextColor(Color.BLACK);
+		
+		TextInputFile leaderboardfile = new TextInputFile("leaderboard.txt");
+		intLineCounter = 0;
+		while (!leaderboardfile.eof()){
+			
+			leaderboardfile.readLine();
+			intLineCounter = intLineCounter + 1;
+			
+		}
+		
+		leaderboardfile.close();
+
+
+		intPlayerCount = intLineCounter / 2;
+
+
+		String[][] strLeaderboardData = new String[intPlayerCount][2];
+
+		leaderboardfile = new TextInputFile("leaderboard.txt");
+		for (intCount = 0; intCount < intPlayerCount; intCount ++){
+			
+			strLeaderboardData[intCount][0] = leaderboardfile.readLine();  
+			strLeaderboardData[intCount][1] = leaderboardfile.readLine(); 
+			 
+		}
+		
+		leaderboardfile.close();
+
+
+		for (intCount2 = 0; intCount2 < intPlayerCount - 1; intCount2 ++){
+			
+			for (intCount3 = 0; intCount3 < intPlayerCount - 1 - intCount2; intCount3 ++){
+				
+				intMoneyTemp1 = Integer.parseInt(strLeaderboardData[intCount3][1]);
+				intMoneyTemp2 = Integer.parseInt(strLeaderboardData[intCount3 + 1][1]);
+				
+				if (intMoneyTemp1 < intMoneyTemp2){
+
+					strTempName = strLeaderboardData[intCount3][0];
+					strLeaderboardData[intCount3][0] = strLeaderboardData[intCount3 + 1][0];
+					strLeaderboardData[intCount3 + 1][0] = strTempName;
+
+
+					strTempMoney = strLeaderboardData[intCount3][1];
+					strLeaderboardData[intCount3][1] = strLeaderboardData[intCount3 + 1][1];
+					strLeaderboardData[intCount3 + 1][1] = strTempMoney;
+				}
+			}
+		}
+
+		con.println("=== Blackjack Leaderboard ===");
+		con.println();
+
+		for (intCount4 = 0; intCount4 < intPlayerCount; intCount4++) {
+			con.println((intCount4 + 1) + ". " + strLeaderboardData[intCount4][0] + " - $" + strLeaderboardData[intCount4][1]);
+		}
+
+		con.println();
+		con.println("Press any key to return to main menu.");
+		con.getChar();
+		
+		con.clear();
 	
 	}
 	
