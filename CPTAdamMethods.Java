@@ -79,4 +79,34 @@ public class CPTAdamMethods{
 		return intDeck;
 		
 	}
+	
+	public static int handvalue(int[][] intHand, int intCardCount){
+		
+        int intTotal = 0;
+        int intAceCount = 0;
+        int intCount;
+        int intCardValue;
+        
+        for (intCount = 0; intCount < intCardCount; intCount ++){
+			
+            intCardValue = intHand[intCount][0];
+            
+            if (intCardValue >= 10) {
+                intTotal = intTotal + 10;
+            } else if (intCardValue == 0){
+                intAceCount = intAceCount + 1;
+                intTotal = intTotal + 11;
+            } else {
+                intTotal = intTotal + intCardValue + 1;
+            }
+        }
+
+  
+        while (intTotal > 21 && intAceCount > 0) {
+            intTotal = intTotal - 10;
+            intAceCount = intAceCount - 1;
+        }
+
+        return intTotal;
+    }
 }
