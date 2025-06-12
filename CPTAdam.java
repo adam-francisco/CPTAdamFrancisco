@@ -128,12 +128,27 @@ public class CPTAdam{
         
         int intPlayerCardCount = 2;
 		int intDealerCardCount = 1;
+		
+		int intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
 
+
+		if(intplayerHandValue == 21){
+			
+			con.println("Blackjack! You instantly win 3x your bet!");
+			intCash = intCash + (intBet * 3);
+			con.println("You now have $" + intCash);
+			
+			con.println("Press any key to return to the main menu...");
+			con.getChar();
+			con.clear();
+			return;
+		}
+				
         boolean blnInHand = true;
 
         while (blnInHand){
 			
-			int intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+			intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
 			int intdealerHandValue = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
 			
 			con.println();
@@ -212,6 +227,7 @@ public class CPTAdam{
 					
 					con.println("Dealer busts! You win!");
 					intCash = intCash + intBet;
+					con.println("You now have $" + intCash);
 					
 				}else if(intDealerTotal > intPlayerTotal){
 					
@@ -287,6 +303,7 @@ public class CPTAdam{
 						
 						con.println("Dealer busts! You win!");
 						intCash = intCash + intBet;
+						con.println("You now have $" + intCash);
 						
 					}else if(intDealerTotal > intPlayerTotal){
 						
