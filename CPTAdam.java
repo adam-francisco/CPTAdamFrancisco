@@ -176,7 +176,21 @@ public class CPTAdam{
 
 				intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
 				con.println("Your hand value is now: " + intplayerHandValue);
-
+				
+				if (intPlayerCardCount == 5 && intplayerHandValue <= 21){
+					
+					con.println("Five Card Charlie! You win 3x your bet!");
+					intCash = intCash + (intBet * 3);
+					con.println("You now have $" + intCash);
+					
+					con.println("Press any key to return to main menu.");
+					con.getChar();
+					
+					con.clear();
+					return;
+					
+				}
+				
 				if(intplayerHandValue > 21){
 					
 					con.println("Bust! You exceeded 21. You lose your bet.");
@@ -289,6 +303,20 @@ public class CPTAdam{
 						
 						intDeckPos = intDeckPos + 1;
 						intDealerCardCount = intDealerCardCount + 1;
+						
+						if (intDealerCardCount == 5 && CPTAdamMethods.handvalue(intDealer, intDealerCardCount) <= 21){
+							
+							con.println("Dealer has Five Card Charlie and wins!");
+							intCash = intCash - intBet;
+							con.println("You have $" + intCash + " remaining.");
+							
+							con.println("Press any key to return to main menu.");
+							con.getChar();
+							
+							con.clear();
+							return;
+							
+						}
 						
 					}
 
