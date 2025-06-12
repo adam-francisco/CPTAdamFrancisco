@@ -142,7 +142,7 @@ public class CPTAdam{
             if (intPlayerCardCount == 2 && (intplayerHandValue == 9 || intplayerHandValue == 10 || intplayerHandValue == 11)){
 				
 				con.println("Press [H] to Hit, [S] to Stand, or [D] to Double Down");
-			} else{
+			}else{
 				
 				con.println("Press [H] to Hit or [S] to Stand");
 			}
@@ -190,7 +190,7 @@ public class CPTAdam{
 				con.println(strValues[intDealer[1][0]] + " of " + strSuits[intDealer[1][1]]);
 
 
-				while (CPTAdamMethods.handvalue(intDealer, intDealerCardCount) < 17 && intDealerCardCount < 5){
+				while(CPTAdamMethods.handvalue(intDealer, intDealerCardCount) < 17 && intDealerCardCount < 5){
 					
 					intDealer[intDealerCardCount][0] = intDeck[intDeckPos][0];
 					intDealer[intDealerCardCount][1] = intDeck[intDeckPos][1];
@@ -208,20 +208,26 @@ public class CPTAdam{
 				con.println("Dealer total: " + intDealerTotal);
 
 
-				if (intDealerTotal > 21){
+				if(intDealerTotal > 21){
 					
 					con.println("Dealer busts! You win!");
 					intCash = intCash + intBet;
-				} else if(intDealerTotal > intPlayerTotal){
+					
+				}else if(intDealerTotal > intPlayerTotal){
 					
 					con.println("Dealer wins.");
 					intCash = intCash - intBet;
-				} else if(intDealerTotal < intPlayerTotal){
+					
+				}else if(intDealerTotal < intPlayerTotal){
 					
 					con.println("You win!");
 					intCash = intCash + intBet;
-				} else{
+					con.println("You now have $" + intCash);
+
+				}else{
+					
 					con.println("Push! It's a tie.");
+					
 				}
 
 				con.println("Press any key to return to the main menu...");
@@ -231,11 +237,90 @@ public class CPTAdam{
 				
 				return;
 				
-			}else{
-                con.println("Invalid option, try again.");
+			}else if((choice == 'd' || choice == 'D') && intPlayerCardCount == 2 && (intplayerHandValue == 9 || intplayerHandValue == 10 || intplayerHandValue == 11)){
+				
+				con.println("You chose to Double Down.");
+				
+				if(intCash >= intBet){
+					intCash = intCash - intBet;
+					intBet = intBet * 2;
+					
+					intPlayer[intPlayerCardCount][0] = intDeck[intDeckPos][0];
+					intPlayer[intPlayerCardCount][1] = intDeck[intDeckPos][1];
+					
+					intDeckPos = intDeckPos + 1;
+					intPlayerCardCount = intPlayerCardCount + 1;
+
+					con.println("You drew: " + strValues[intPlayer[intPlayerCardCount - 1][0]] + " of " + strSuits[intPlayer[intPlayerCardCount - 1][1]]);
+
+					intplayerHandValue = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+					con.println("Your hand value is now: " + intplayerHandValue);
+
+					con.println("Dealer reveals second card:");
+					intDealer[1][0] = intDeck[intDeckPos][0];
+					intDealer[1][1] = intDeck[intDeckPos][1];
+					
+					intDeckPos = intDeckPos + 1;
+					intDealerCardCount = 2;
+					
+					con.println(strValues[intDealer[1][0]] + " of " + strSuits[intDealer[1][1]]);
+
+					while(CPTAdamMethods.handvalue(intDealer, intDealerCardCount) < 17 && intDealerCardCount < 5){
+						
+						intDealer[intDealerCardCount][0] = intDeck[intDeckPos][0];
+						intDealer[intDealerCardCount][1] = intDeck[intDeckPos][1];
+						con.println("Dealer draws: " + strValues[intDealer[intDealerCardCount][0]] + " of " + strSuits[intDealer[intDealerCardCount][1]]);
+						
+						intDeckPos = intDeckPos + 1;
+						intDealerCardCount = intDealerCardCount + 1;
+						
+					}
+
+					int intPlayerTotal = CPTAdamMethods.handvalue(intPlayer, intPlayerCardCount);
+					int intDealerTotal = CPTAdamMethods.handvalue(intDealer, intDealerCardCount);
+
+					con.println();
+					con.println("Your total: " + intPlayerTotal);
+					con.println("Dealer total: " + intDealerTotal);
+
+					if(intDealerTotal > 21){
+						
+						con.println("Dealer busts! You win!");
+						intCash = intCash + intBet;
+						
+					}else if(intDealerTotal > intPlayerTotal){
+						
+						con.println("Dealer wins.");
+						intCash = intCash - intBet;
+						
+					}else if(intDealerTotal < intPlayerTotal){
+						
+						con.println("You win!");
+						intCash = intCash + intBet;
+						con.println("You now have $" + intCash);
+						
+					}else{
+						con.println("Push! It's a tie.");
+					}
+
+					con.println("Press any key to return to the main menu...");
+					con.getChar();
+					
+					con.clear();
+					
+					return;
+					
+				}else{
+					
+					con.println("You don’t have enough money to double down.");
+					continue;
+					
+				}
 			
-            }
+            }else{
+                con.println("Invalid option, try again.");
             
+			}
         }
     }
 }
@@ -272,7 +357,7 @@ public class CPTAdam{
 			char chrOption2 = con.getChar();
 			System.out.println("entered letter: "+chrOption2);
 
-			if(chrOption2 == 'r' || chrOption2 == 'R') {
+			if(chrOption2 == 'r' || chrOption2 == 'R'){
 
 				con.setBackgroundColor(Color.WHITE);
 				con.clear();
@@ -284,7 +369,7 @@ public class CPTAdam{
 
 				con.getChar();
 
-			} else if(chrOption2 == 'c' || chrOption2 == 'C') {
+			}else if(chrOption2 == 'c' || chrOption2 == 'C'){
 				con.setBackgroundColor(new Color(131,203,123));
 				con.clear();
 
@@ -294,7 +379,7 @@ public class CPTAdam{
 
 				con.getChar();
 
-			} else if(chrOption2 == 's' || chrOption2 == 'S') {
+			}else if(chrOption2 == 's' || chrOption2 == 'S'){
 				con.setBackgroundColor(Color.WHITE);
 				con.clear();
 
@@ -304,7 +389,7 @@ public class CPTAdam{
 
 				con.getChar();
 
-			} else if(chrOption2 == 'q' || chrOption2 == 'Q') {
+			}else if(chrOption2 == 'q' || chrOption2 == 'Q'){
 
 				con.clear();
 				return;
