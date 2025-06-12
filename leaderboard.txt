@@ -4,3 +4,5 @@ adam
 2000
 adam
 1400
+statitan
+10000

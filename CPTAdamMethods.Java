@@ -6,21 +6,27 @@ public class CPTAdamMethods{
 	public static void main(String[] args){
 		Console con = new Console();
 		
+		//TEST: Just to see if the deck prints on terminal
 		deck();
 		
 	}
 	public static int[][] deck() {
 		
+		// intDeck which is 52x3
 		int intDeck[][] = new int[52][3];
 		
+		// Variables for determinig numbers needed for each card (ie amount of cards, card value 0-12, and card suit 0-3
 		int intCards = 0;
 		int intCardValue;
 		int intCardSuit;
 		
+		// For loop for each suit 
 		for (intCardSuit = 0; intCardSuit < 4; intCardSuit++) {
 			
+			// For loop for each card value
 			for (intCardValue = 0; intCardValue < 13; intCardValue++) {
 				
+				// Assigns, card value, card suit, and a random number between 100 - 1
 				intDeck[intCards][0] = intCardValue;
 				intDeck[intCards][1] = intCardSuit;
 				intDeck[intCards][2] = (int)(Math.random() * 100 + 1);
@@ -28,6 +34,7 @@ public class CPTAdamMethods{
 			}
 		}
 		
+		// Initializes variables
 		int intValueTemp;
 		int intSuitTemp;
 		int intRandTemp;
@@ -82,17 +89,22 @@ public class CPTAdamMethods{
 	
 	public static int handvalue(int[][] intHand, int intCardCount){
 		
+		// Initializes variables
         int intTotal = 0;
         int intAceCount = 0;
         int intCount;
         int intCardValue;
-        
+      
+        // For loop from cardcount from main program
         for (intCount = 0; intCount < intCardCount; intCount ++){
 			
             intCardValue = intHand[intCount][0];
             
+            // For face cards given their values are above 10
             if (intCardValue >= 10) {
                 intTotal = intTotal + 10;
+            
+            // Ace's being either 1 or 11
             } else if (intCardValue == 0){
                 intAceCount = intAceCount + 1;
                 intTotal = intTotal + 11;
@@ -101,12 +113,12 @@ public class CPTAdamMethods{
             }
         }
 
-  
+		// Ace's being either 1 or 11 pt. 2
         while (intTotal > 21 && intAceCount > 0) {
             intTotal = intTotal - 10;
             intAceCount = intAceCount - 1;
         }
-
+		
         return intTotal;
     }
 }

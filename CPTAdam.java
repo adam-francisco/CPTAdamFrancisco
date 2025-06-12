@@ -88,7 +88,7 @@ public class CPTAdam{
     if(strName.equalsIgnoreCase("statitan")){
 		
 		// Player buff
-        intCash = 2500;
+        intCash = 5000;
         
     }
 	
@@ -485,6 +485,7 @@ public class CPTAdam{
 	
 	public static void leaderboard(Console con){
 	
+		// Creates all variables
 		int intLineCounter;
 		int intPlayerCount;
 		int intCount;
@@ -495,12 +496,18 @@ public class CPTAdam{
 		String strTempName;
 		String strTempMoney;
 		int intCount4;
-	
+		
+		// Changes background color for a fresh look instead of the black
 		con.setBackgroundColor(Color.WHITE);
 		con.setTextColor(Color.BLACK);
 		
+		// Calls new leaderboard for reading
 		TextInputFile leaderboardfile = new TextInputFile("leaderboard.txt");
+		
+		// Starts line counter
 		intLineCounter = 0;
+		
+		// Starts loop for checking how many lines are in the file
 		while (!leaderboardfile.eof()){
 			
 			leaderboardfile.readLine();
@@ -508,122 +515,168 @@ public class CPTAdam{
 			
 		}
 		
+		// Closes file
 		leaderboardfile.close();
 
-
+		// Divides line counter by 2 as names will be printed as "name - cash" instead of cash being beneath
 		intPlayerCount = intLineCounter / 2;
 
-
+		// Creates new array
 		String[][] strLeaderboardData = new String[intPlayerCount][2];
-
+		
+		// Reads file
 		leaderboardfile = new TextInputFile("leaderboard.txt");
+		
+		// Counts by amount of players
 		for (intCount = 0; intCount < intPlayerCount; intCount ++){
 			
+			// Stores data
 			strLeaderboardData[intCount][0] = leaderboardfile.readLine();  
 			strLeaderboardData[intCount][1] = leaderboardfile.readLine(); 
 			 
 		}
 		
+		// Closes file
 		leaderboardfile.close();
-
 
 		for (intCount2 = 0; intCount2 < intPlayerCount - 1; intCount2 ++){
 			
 			for (intCount3 = 0; intCount3 < intPlayerCount - 1 - intCount2; intCount3 ++){
 				
+				// Turns string to integer for comparison
 				intMoneyTemp1 = Integer.parseInt(strLeaderboardData[intCount3][1]);
 				intMoneyTemp2 = Integer.parseInt(strLeaderboardData[intCount3 + 1][1]);
 				
 				if (intMoneyTemp1 < intMoneyTemp2){
-
+					
+					// Swaps name
 					strTempName = strLeaderboardData[intCount3][0];
 					strLeaderboardData[intCount3][0] = strLeaderboardData[intCount3 + 1][0];
 					strLeaderboardData[intCount3 + 1][0] = strTempName;
 
-
+					// Swaps Money
 					strTempMoney = strLeaderboardData[intCount3][1];
 					strLeaderboardData[intCount3][1] = strLeaderboardData[intCount3 + 1][1];
 					strLeaderboardData[intCount3 + 1][1] = strTempMoney;
 				}
 			}
 		}
-
+		
+		// Small design
 		con.println("=== Blackjack Leaderboard ===");
 		con.println();
-
+		
+		// Prints listing number, name, and money
 		for (intCount4 = 0; intCount4 < intPlayerCount; intCount4++) {
 			con.println((intCount4 + 1) + ". " + strLeaderboardData[intCount4][0] + " - $" + strLeaderboardData[intCount4][1]);
 		}
-
+		
+		//Prompts to return to main menu
 		con.println();
 		con.println("Press any key to return to main menu.");
 		con.getChar();
 		
+		//Clears screen
 		con.clear();
 	
 	}
 	
 	public static void help(Console con) {
 		while(true){
-       
+			
+			// White to match main menu, and leaderboard
 			con.setBackgroundColor(Color.WHITE);
+			
+			//clears previous images and drawings
 			con.clear();
         
+			// Added Image
 			BufferedImage imgAces = con.loadImage("Aces.png");
 			con.drawImage(imgAces, 300, 0);
-
+			
+			// Created text for options
 			con.setDrawColor(Color.BLACK);
 			con.drawString("HELP MENU",445,380);
 			con.drawString("[R] Rules",445,460);    
 			con.drawString("[C] Card Values",445,490);
 			con.drawString("[Q] Main Menu",445,520);
 			
+			// Secret menu for meme
 			con.setDrawColor(new Color(250, 250, 250));
 			con.drawString("[S] ???",445,550);        
 			
+			// Divider
 			con.setDrawColor(new Color(205, 205, 205));
 			con.fillRect(400, 430, 200, 5);
-
+			
+			// Repaints so the drawing does not need to load
 			con.repaint();
-
+			
+			// Checks option of player
 			char chrOption2 = con.getChar();
 			System.out.println("entered letter: "+chrOption2);
-
+			
+			// Goes to rules page
 			if(chrOption2 == 'r' || chrOption2 == 'R'){
-
+				
 				con.setBackgroundColor(Color.WHITE);
+				
+				// Clears background
 				con.clear();
-
+				
+				// Loads rules image
 				BufferedImage imgRules = con.loadImage("Rules.png");
 				con.drawImage(imgRules, 0, 0);
+				
+				// Repaints
 				con.repaint();
 
-
+				// Goes back to main menu no matter what key they press
 				con.getChar();
-
+			
+			// Card Values option
 			}else if(chrOption2 == 'c' || chrOption2 == 'C'){
+				
+				//New background color
 				con.setBackgroundColor(new Color(131,203,123));
+				
+				// Clears previous images
 				con.clear();
 
+				// Loads card values image to the game
 				BufferedImage imgValue = con.loadImage("CardValues.png");
 				con.drawImage(imgValue, 100, 0);
+				
+				// Repaints
 				con.repaint();
-
+				
+				// Goes back to main menu no matter what key they press
 				con.getChar();
-
+			
+			// Secret Menu option
 			}else if(chrOption2 == 's' || chrOption2 == 'S'){
+				
 				con.setBackgroundColor(Color.WHITE);
+				
+				// Clears previous drawings
 				con.clear();
-
+				
+				// Loads in meme
 				BufferedImage imgMeme = con.loadImage("Meme.png");
 				con.drawImage(imgMeme, 0, 0);
+				
+				// Repaints
 				con.repaint();
-
+				
+				// Goes back to main menu no matter what key they press
 				con.getChar();
-
+			
+			// Quit to menu option
 			}else if(chrOption2 == 'q' || chrOption2 == 'Q'){
-
+				
+				// Clears previous drawings
 				con.clear();
+				
 				return;
 			}
 
